@@ -1,14 +1,9 @@
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
-import db from './db'
+import { registerRoutes } from './routes';
 
 const fastify = Fastify({
   logger: true
-})
-
-fastify.get('/', async (request, reply) => {
-  const players = await db.player.findMany()
-  return players
 })
 
 fastify.register(cors, {
@@ -16,6 +11,8 @@ fastify.register(cors, {
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization", "Accept"],
 });
+
+registerRoutes(fastify)
 
 /**
  * Run the server!
