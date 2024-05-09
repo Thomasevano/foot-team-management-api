@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "restart foot-team-management-api",
+      "type": "shell",
+      "command": "docker compose restart foot-team-management-api",
+      "presentation": {
+        "reveal": "never"
+      }
+    }
+  ]
+}

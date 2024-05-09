@@ -5,20 +5,34 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && swc ./src --strip-leading-paths -d dist",
+    "db:console": "pgcli postgres://postgres@localhost:5433/foot-team-management_dev",
+    "db:migrate": "pnpx prisma migrate dev",
+    "db:migrate:noSeed": "pnpx prisma migrate dev --skip-seed",
+    "db:migrate:push": "pnpx prisma db push",
+    "db:seed:dev": "ts-node prisma/seed.ts",
+    "rebuild:be": "docker compose build foot-team-management-api && docker compose rm --force --stop foot-team-management-api && docker compose up -d foot-team-management-api",
     "start": "node dist/index.js",
+    "start:docker": "pnpm build && node --inspect=0.0.0.0 dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "typescript": "^5.4.5"
+    "@prisma/client": "^5.13.0",
+    "fastify": "^4.27.0"
   },
   "devDependencies": {
     "@swc/cli": "^0.3.12",
     "@swc/core": "^1.5.5",
     "@tsconfig/node-lts": "^20.1.3",
     "@types/node": "^20.12.10",
-    "rimraf": "^5.0.5"
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint": "^9.2.0",
+    "prisma": "^5.13.0",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }
