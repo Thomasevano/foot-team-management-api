@@ -1,10 +1,11 @@
 import { test } from '@japa/runner'
 import testUtils from '@adonisjs/core/services/test_utils'
+import { ApiResponse } from '@japa/api-client'
 
-test.group('Players list', (group) => {
+test.group('GET /players', (group) => {
   group.each.setup(() => testUtils.db().withGlobalTransaction())
-  test('get a list of players', async ({ client }) => {
-    const response = await client.get('/players')
+  test('when there is players in the db it get a list of players', async ({ client }) => {
+    const response: ApiResponse = await client.get('/players')
 
     response.assertStatus(200)
     response.assertBodyContains({
