@@ -22,7 +22,20 @@ export default class PlayersController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) { }
+  async store({ request, response }: HttpContext) {
+    const requestData = request.body()
+    const payload = await createUpdatePlayerValidator.validate(requestData)
+
+    const player = await Player.create({
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      fullName: payload.fullName,
+      birthDate: DateTime.fromFormat(payload.birthDate, 'yyyy-MM-dd'),
+      nationality: payload.nationality,
+    })
+
+    return response.status(201).send(player.$isPersisted)
+  }
 
   /**
    * Show individual record
