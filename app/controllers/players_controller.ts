@@ -35,5 +35,9 @@ export default class PlayersController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) { }
+  async destroy({ params, response }: HttpContext) {
+    const player = await Player.findOrFail(params.id)
+    await player.delete()
+    return response.status(204)
+  }
 }
