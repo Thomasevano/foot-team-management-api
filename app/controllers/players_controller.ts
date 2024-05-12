@@ -23,8 +23,7 @@ export default class PlayersController {
    * Handle form submission for the create action
    */
   async store({ request, response }: HttpContext) {
-    const requestData = request.body()
-    const payload = await createUpdatePlayerValidator.validate(requestData)
+    const payload = await request.validateUsing(createUpdatePlayerValidator)
 
     const player = await Player.create({
       firstName: payload.firstName,
@@ -56,8 +55,7 @@ export default class PlayersController {
    */
   async update({ params, request, response }: HttpContext) {
     const player: Player = await Player.findOrFail(params.id)
-    const requestData = request.body()
-    const payload = await createUpdatePlayerValidator.validate(requestData)
+    const payload = await request.validateUsing(createUpdatePlayerValidator)
 
     player.firstName = payload.firstName
     player.lastName = payload.lastName
