@@ -25,7 +25,16 @@ export default class PlayersController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) { }
+  async show({ params, response }: HttpContext) {
+    const player = await Player.findOrFail(params.id)
+    const playerJSON = player.serialize({
+      fields: {
+        omit: ['id', 'createdAt', 'updatedAt'],
+      },
+    })
+
+    return response.status(200).send(playerJSON)
+  }
 
   /**
    * Handle form submission for the edit action
