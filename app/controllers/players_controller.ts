@@ -1,5 +1,7 @@
 import Player from '#models/player'
 import type { HttpContext } from '@adonisjs/core/http'
+import { DateTime } from 'luxon'
+import { createUpdatePlayerValidator } from '#validators/player'
 
 export default class PlayersController {
   /**
@@ -39,7 +41,28 @@ export default class PlayersController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) { }
+  async update({ params, request, response }: HttpContext) {
+    const player: Player = await Player.findOrFail(params.id)
+    const requestData = request.body()
+    const payload = await createUpdatePlayerValidator.validate(requestData)
+
+    player.firstName = payload.firstName
+    player.lastName = payload.lastName
+    player.fullName = payload.fullName
+    player.birthDate = DateTime.fromFormat(payload.birthDate, 'yyyy-MM-dd')
+    player.nationality = payload.nationality
+    player.updatedAt = DateTime.local()
+    await player.save()
+
+    const updatedPlayer = await Player.findOrFail(player.id)
+    const playerJSON = updatedPlayer.serialize({
+      fields: {
+        omit: ['id', 'createdAt', 'updatedAt'],
+      },
+    })
+
+    return response.status(200).send(playerJSON)
+  }
 
   /**
    * Delete record
