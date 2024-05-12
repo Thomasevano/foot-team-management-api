@@ -3,7 +3,7 @@ import Player from '#models/player'
 import { DateTime } from 'luxon'
 
 export default class extends BaseSeeder {
-  static environment = ['development']
+  static environment = ['development', 'testing']
 
   async run() {
     const uniqueKey = 'fullName'
@@ -14,14 +14,14 @@ export default class extends BaseSeeder {
         lastName: 'Mbappé',
         fullName: 'Kylian Mbappé',
         birthDate: DateTime.fromFormat('1998-12-20', 'yyyy-MM-dd'),
-        nationality: 'French',
+        nationality: 'France',
       },
       {
         firstName: 'Antoine',
         lastName: 'Griezmann',
         fullName: 'Antoine Griezmann',
         birthDate: DateTime.fromFormat('1991-03-21', 'yyyy-MM-dd'),
-        nationality: 'French',
+        nationality: 'France',
       },
     ])
   }

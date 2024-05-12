@@ -17,9 +17,7 @@ export default class Player extends BaseModel {
   @column()
   declare nationality: string
 
-  @column.date({
-    serialize: (value) => value.toFormat('yyyy-mm-dd'),
-  })
+  @column.date()
   declare birthDate: DateTime
 
   @column.dateTime({ autoCreate: true })

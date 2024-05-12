@@ -5,9 +5,16 @@ export default class PlayersController {
   /**
    * Display a list of resource
    */
-  async index() {
+  async index({ response }: HttpContext) {
     const players = await Player.all()
-    return players
+    const playersJSON = players.map((player) =>
+      player.serialize({
+        fields: {
+          omit: ['id', 'createdAt', 'updatedAt'],
+        },
+      })
+    )
+    return response.status(200).send({ data: playersJSON })
   }
 
   /**
