@@ -3,7 +3,7 @@ import Player from '#models/player'
 import { DateTime } from 'luxon'
 
 export default class extends BaseSeeder {
-  static environment = ['development', 'testing']
+  static environment = ['development', 'test']
 
   async run() {
     const uniqueKey = 'fullName'
