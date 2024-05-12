@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foot-team-management-api-demo
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1 # as an absolute number of replicas
+      maxUnavailable: 33% # as % of replicas
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: foot-team-management-api-container
+          image: foot-team-management-api-image:latest
+          imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: foot-team-management-api-entrypoint
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: api
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30001
