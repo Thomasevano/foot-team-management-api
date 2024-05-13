@@ -8,7 +8,7 @@ export default class PlayersController {
    * Display a list of resource
    */
   async index({ response }: HttpContext) {
-    const players = await Player.all()
+    const players: Player[] = await Player.all()
     const playersJSON = players.map((player) =>
       player.serialize({
         fields: {
@@ -31,6 +31,7 @@ export default class PlayersController {
       fullName: payload.fullName,
       birthDate: DateTime.fromFormat(payload.birthDate, 'yyyy-MM-dd'),
       nationality: payload.nationality,
+      shirtNumber: payload.shirtNumber,
     })
 
     return response.status(201).send(player.$isPersisted)
@@ -63,6 +64,7 @@ export default class PlayersController {
     player.birthDate = DateTime.fromFormat(payload.birthDate, 'yyyy-MM-dd')
     player.nationality = payload.nationality
     player.updatedAt = DateTime.local()
+    player.shirtNumber = payload.shirtNumber
     await player.save()
 
     const updatedPlayer = await Player.findOrFail(player.id)

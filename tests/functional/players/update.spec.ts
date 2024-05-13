@@ -12,6 +12,7 @@ test.group('PUT /players/:id', (group) => {
       fullName: 'Antoine Griezmann',
       birthDate: '1991-03-21',
       nationality: 'Spain',
+      shirtNumber: 7,
     }
 
     // When
@@ -27,6 +28,7 @@ test.group('PUT /players/:id', (group) => {
       fullName: 'Antoine Griezmann',
       birthDate: '1991-03-21',
       nationality: 'Spain',
+      shirtNumber: 7,
     })
   })
 
@@ -38,6 +40,7 @@ test.group('PUT /players/:id', (group) => {
       fullName: 'Antoine Griezmann',
       birthDate: '1991/03/21',
       nationality: 'Spain',
+      shirtNumber: 7,
     }
 
     // When
@@ -66,6 +69,7 @@ test.group('PUT /players/:id', (group) => {
       fullName: true,
       birthDate: '1991-03-21',
       nationality: 'Spain',
+      shirtNumber: 7,
     }
 
     // When

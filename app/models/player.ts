@@ -17,6 +17,9 @@ export default class Player extends BaseModel {
   @column()
   declare nationality: string
 
+  @column()
+  declare shirtNumber: number
+
   @column.date()
   declare birthDate: DateTime
 

@@ -12,6 +12,7 @@ test.group('POST /players', (group) => {
       fullName: 'Zinédine Zidane',
       birthDate: '1972-06-23',
       nationality: 'France',
+      shirtNumber: 10,
     }
 
     // When
@@ -30,6 +31,7 @@ test.group('POST /players', (group) => {
       fullName: 'Zinédine Zidane',
       birthDate: '1972/06/23',
       nationality: 'France',
+      shirtNumber: 10,
     }
 
     // When
@@ -58,6 +60,7 @@ test.group('POST /players', (group) => {
       fullName: ['Zinédine', 'Zidane'],
       birthDate: '1972-06-23',
       nationality: 'France',
+      shirtNumber: 10,
     }
 
     // When

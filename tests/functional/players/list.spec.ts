@@ -16,6 +16,7 @@ test.group('GET /players', (group) => {
           fullName: 'Kylian Mbappé',
           birthDate: '1998-12-20',
           nationality: 'France',
+          shirtNumber: 10,
         },
         {
           firstName: 'Antoine',
@@ -23,6 +24,7 @@ test.group('GET /players', (group) => {
           fullName: 'Antoine Griezmann',
           birthDate: '1991-03-21',
           nationality: 'France',
+          shirtNumber: 7,
         },
       ],
     })
