@@ -11,6 +11,14 @@ import router from '@adonisjs/core/services/router'
 const PlayersController = () => import('#controllers/players_controller')
 import Player from '#models/player'
 import type { HttpContext } from '@adonisjs/core/http'
+import User from '#models/user'
+// import { middleware } from './kernel.js'
+
+// router
+//   .get('/', async ({ auth }) => {
+//     return auth.getUserOrFail()
+//   })
+//   .use(middleware.auth())
 
 router.resource('players', PlayersController).apiOnly()
 
@@ -43,4 +51,11 @@ router.get('/player/search', async ({ params, response, request }: HttpContext) 
   )
 
   return response.status(200).send(playersJSON)
+})
+
+router.post('login', async ({ request, auth }) => {
+  const { email, password } = request.all()
+  const user = await User.verifyCredentials(email, password)
+
+  return await auth.use('jwt').generate(user)
 })

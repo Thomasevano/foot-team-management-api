@@ -59,8 +59,10 @@
     "@adonisjs/core": "^6.9.0",
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^20.6.0",
+    "@types/jsonwebtoken": "^9.0.6",
     "@vinejs/vine": "^2.0.0",
     "better-sqlite3": "^9.6.0",
+    "jsonwebtoken": "^9.0.2",
     "luxon": "^3.4.4",
     "reflect-metadata": "^0.2.2"
   },
